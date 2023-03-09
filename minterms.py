@@ -37,9 +37,9 @@ def stringApproach():
                 print("pareja", first, second)
                 
                 if(diferencia == 1):
-                    listaFusion.update({fusion: 0})
-                    aux_entrada.update({entrada[i][0]: 1})
-                    aux_entrada.update({entrada[j][0]: 1})
+                    listaFusion[fusion]=0
+                    aux_entrada[entrada[i][0]]=1
+                    aux_entrada[entrada[j][0]]=1
                     print("fusion",fusion)
 
         print("primos", lista_primos(aux_entrada))
