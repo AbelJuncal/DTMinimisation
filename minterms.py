@@ -1,3 +1,30 @@
+class Implicant():
+    def matches(otherImplicant):
+        raise "This class is not intended to be instantiated"
+    
+class BooleanImplicant(Implicant):
+    def __init__(self, string):
+        self.string = string
+
+    def matches(self, otherImplicant):
+    
+        diferencia = 0
+        fusion = ""
+
+        for z in range(len(self.string)):
+            if self.string[z] == otherImplicant.string[z]:
+                fusion = fusion + self.string[z]
+            else:
+                fusion = fusion + "-"
+                diferencia+=1
+
+        if(diferencia == 1):
+            return Implicant(fusion)
+        
+        return None
+
+    def __str__ (self):
+        return self.string
 
 def lista_primos(dicImplicantes):
     listaPrimos = []
