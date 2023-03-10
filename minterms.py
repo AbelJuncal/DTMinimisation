@@ -19,7 +19,7 @@ class BooleanImplicant(Implicant):
                 diferencia+=1
 
         if(diferencia == 1):
-            return Implicant(fusion)
+            return BooleanImplicant(fusion)
         
         return None
 
@@ -35,46 +35,32 @@ def lista_primos(dicImplicantes):
     return listaPrimos
 
 def stringApproach():
-    entrada = ["001","101","110","111"]
+    entrada = [BooleanImplicant("001"),BooleanImplicant("101"), BooleanImplicant("110"), BooleanImplicant("111")]
     salida = set()
+
+    print("entrada", ' '.join(map(str, entrada))) 
 
     while(entrada):
         aux_entrada = list_to_dictionary(entrada)
         listaFusion = []
 
-        print("entrada", aux_entrada, "\n")
-
         for i in range(0, len(entrada)-1):
             for j in range(i+1, len(entrada)):
-                first = [*entrada[i]]
-                second = [*entrada[j]]
+                first = entrada[i]
+                second = entrada[j]
 
-                diferencia = 0
-                fusion = ""
-
-                for z in range(len(first)):
-                    if first[z] == second[z]:
-                        fusion = fusion + first[z]
-                    else:
-                        fusion = fusion + "-"
-                        diferencia+=1
-
-                print("pareja", first, second)
+                fusion = first.matches(second)
                 
-                if(diferencia == 1):
+                if fusion:
                     listaFusion.append(fusion)
-                    aux_entrada[entrada[i]]=1
-                    aux_entrada[entrada[j]]=1
-                    print("fusion",fusion)
+                    aux_entrada[first]=1
+                    aux_entrada[second]=1
 
-        print("primos", lista_primos(aux_entrada))
         salida.update(lista_primos(aux_entrada))
         
-        print("listaFusion", listaFusion)
-        print("\n")
         entrada = listaFusion
 
-    print("salida", list(salida))
+    print("salida", ' '.join(map(str, salida)))
 
 def list_to_dictionary(list):
     dict = {}
