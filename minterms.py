@@ -73,12 +73,27 @@ def listToDictionary(list):
 
     return dict
 
+def readBooleanInput(filename):
+    file = open(filename)
+    lines = file.read().splitlines()
+    input = []
+
+    for line in lines:
+        implicant = BooleanImplicant(line)
+        input.append(implicant)
+
+    return input
+
 def main():
-    input = [BooleanImplicant("001"),BooleanImplicant("101"), BooleanImplicant("110"), BooleanImplicant("111")]
+    #input = [BooleanImplicant("001"),BooleanImplicant("101"), BooleanImplicant("110"), BooleanImplicant("111")]
+
+    input = readBooleanInput("Examples/booleanExample1.txt")
 
     output = stringApproach(input)
 
     printOutput(input, output)
+
+
 
 
 if __name__ == "__main__":
