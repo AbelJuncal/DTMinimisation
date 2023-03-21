@@ -85,7 +85,6 @@ def readBooleanInput(filename):
     return input
 
 def main():
-    #input = [BooleanImplicant("001"),BooleanImplicant("101"), BooleanImplicant("110"), BooleanImplicant("111")]
 
     input = readBooleanInput("Examples/booleanExample1.txt")
 
