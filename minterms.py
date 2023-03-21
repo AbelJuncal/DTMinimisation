@@ -39,7 +39,7 @@ def stringApproach(input):
     output = set()
 
     while(input):
-        auxInput = list_to_dictionary(input)
+        auxInput = listToDictionary(input)
         mergingList = []
 
         for i in range(0, len(input)-1):
@@ -65,7 +65,7 @@ def printOutput(input, output):
     print("output", ' '.join(map(str, output)))
 
 
-def list_to_dictionary(list):
+def listToDictionary(list):
     dict = {}
 
     for element in list:
