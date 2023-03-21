@@ -1,55 +1,71 @@
+class Implicant():
+    def matches(otherImplicant):
+        raise "This class is not intended to be instantiated"
+    
+class BooleanImplicant(Implicant):
+    def __init__(self, string):
+        self.string = string
 
-def lista_primos(dicImplicantes):
-    listaPrimos = []
-    for x , y in dicImplicantes.items():
-        if y == 0:
-            listaPrimos.append(x)
+    def matches(self, otherImplicant):
+    
+        difference = 0
+        merging = ""
 
-    return listaPrimos
+        for z in range(len(self.string)):
+            if self.string[z] == otherImplicant.string[z]:
+                merging = merging + self.string[z]
+            else:
+                merging = merging + "-"
+                difference+=1
 
-def stringApproach():
-    entrada = ["001","101","110","111"]
-    salida = set()
-
-    while(entrada):
-        aux_entrada = list_to_dictionary(entrada)
-        listaFusion = []
-
-        print("entrada", aux_entrada, "\n")
-
-        for i in range(0, len(entrada)-1):
-            for j in range(i+1, len(entrada)):
-                first = [*entrada[i]]
-                second = [*entrada[j]]
-
-                diferencia = 0
-                fusion = ""
-
-                for z in range(len(first)):
-                    if first[z] == second[z]:
-                        fusion = fusion + first[z]
-                    else:
-                        fusion = fusion + "-"
-                        diferencia+=1
-
-                print("pareja", first, second)
-                
-                if(diferencia == 1):
-                    listaFusion.append(fusion)
-                    aux_entrada[entrada[i]]=1
-                    aux_entrada[entrada[j]]=1
-                    print("fusion",fusion)
-
-        print("primos", lista_primos(aux_entrada))
-        salida.update(lista_primos(aux_entrada))
+        if(difference == 1):
+            return BooleanImplicant(merging)
         
-        print("listaFusion", listaFusion)
-        print("\n")
-        entrada = listaFusion
+        return None
 
-    print("salida", list(salida))
+    def __str__ (self):
+        return self.string
 
-def list_to_dictionary(list):
+def primeImplicants(dicImplicants):
+    primeList = []
+    for x , y in dicImplicants.items():
+        if y == 0:
+            primeList.append(x)
+
+    return primeList
+
+def stringApproach(input):
+
+    output = set()
+
+    while(input):
+        auxInput = listToDictionary(input)
+        mergingList = []
+
+        for i in range(0, len(input)-1):
+            for j in range(i+1, len(input)):
+                first = input[i]
+                second = input[j]
+
+                fusion = first.matches(second)
+                
+                if fusion:
+                    mergingList.append(fusion)
+                    auxInput[first]=1
+                    auxInput[second]=1
+
+        output.update(primeImplicants(auxInput))
+        
+        input = mergingList
+
+    return output
+
+def printOutput(input, output):
+    print("input", ' '.join(map(str, input))) 
+    print("output", ' '.join(map(str, output)))
+
+
+def listToDictionary(list):
     dict = {}
 
     for element in list:
@@ -57,6 +73,13 @@ def list_to_dictionary(list):
 
     return dict
 
+def main():
+    input = [BooleanImplicant("001"),BooleanImplicant("101"), BooleanImplicant("110"), BooleanImplicant("111")]
+
+    output = stringApproach(input)
+
+    printOutput(input, output)
+
 
 if __name__ == "__main__":
-    stringApproach()
+    main()
