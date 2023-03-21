@@ -34,11 +34,9 @@ def lista_primos(dicImplicantes):
 
     return listaPrimos
 
-def stringApproach():
-    entrada = [BooleanImplicant("001"),BooleanImplicant("101"), BooleanImplicant("110"), BooleanImplicant("111")]
-    salida = set()
+def stringApproach(entrada):
 
-    print("entrada", ' '.join(map(str, entrada))) 
+    salida = set()
 
     while(entrada):
         aux_entrada = list_to_dictionary(entrada)
@@ -60,7 +58,12 @@ def stringApproach():
         
         entrada = listaFusion
 
+    return salida
+
+def printOutput(entrada, salida):
+    print("entrada", ' '.join(map(str, entrada))) 
     print("salida", ' '.join(map(str, salida)))
+
 
 def list_to_dictionary(list):
     dict = {}
@@ -70,6 +73,13 @@ def list_to_dictionary(list):
 
     return dict
 
+def main():
+    entrada = [BooleanImplicant("001"),BooleanImplicant("101"), BooleanImplicant("110"), BooleanImplicant("111")]
+
+    salida = stringApproach(entrada)
+
+    printOutput(entrada, salida)
+
 
 if __name__ == "__main__":
-    stringApproach()
+    main()
