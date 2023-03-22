@@ -33,7 +33,7 @@ class QuineMcCluskey(object):
         output = set()
 
         while(input):
-            auxInput = listToDictionary(input)
+            auxInput = Resources.listToDictionary(input)
             mergingList = []
 
             for i in range(0, len(input)-1):
@@ -48,53 +48,56 @@ class QuineMcCluskey(object):
                         auxInput[first]=1
                         auxInput[second]=1
 
-            output.update(primeImplicants(auxInput))
+            output.update(Resources.primeImplicants(auxInput))
             
             input = mergingList
 
         return output
 
+class Resources(object):
+    
+    @classmethod
+    def primeImplicants(self, dicImplicants):
+        primeList = []
+        for x , y in dicImplicants.items():
+            if y == 0:
+                primeList.append(x)
 
+        return primeList
 
-def primeImplicants(dicImplicants):
-    primeList = []
-    for x , y in dicImplicants.items():
-        if y == 0:
-            primeList.append(x)
+    @classmethod
+    def printOutput(self, input, output):
+        print("input", ' '.join(map(str, input))) 
+        print("output", ' '.join(map(str, output)))
 
-    return primeList
+    @classmethod
+    def listToDictionary(self, list):
+        dict = {}
 
-def printOutput(input, output):
-    print("input", ' '.join(map(str, input))) 
-    print("output", ' '.join(map(str, output)))
+        for element in list:
+            dict[element] = 0
 
+        return dict
 
-def listToDictionary(list):
-    dict = {}
+    @classmethod
+    def readBooleanInput(self, filename):
+        file = open(filename)
+        lines = file.read().splitlines()
+        input = []
 
-    for element in list:
-        dict[element] = 0
+        for line in lines:
+            implicant = BooleanImplicant(line)
+            input.append(implicant)
 
-    return dict
-
-def readBooleanInput(filename):
-    file = open(filename)
-    lines = file.read().splitlines()
-    input = []
-
-    for line in lines:
-        implicant = BooleanImplicant(line)
-        input.append(implicant)
-
-    return input
+        return input
 
 def main():
 
-    input = readBooleanInput("Examples/booleanExample1.txt")
+    input = Resources.readBooleanInput("Examples/booleanExample1.txt")
 
     output = QuineMcCluskey.execute(input)
 
-    printOutput(input, output)
+    Resources.printOutput(input, output)
 
 
 
