@@ -25,6 +25,36 @@ class BooleanImplicant(Implicant):
 
     def __str__ (self):
         return self.string
+    
+class QuineMcCluskey(object):
+    @classmethod
+    def execute(input):
+
+        output = set()
+
+        while(input):
+            auxInput = listToDictionary(input)
+            mergingList = []
+
+            for i in range(0, len(input)-1):
+                for j in range(i+1, len(input)):
+                    first = input[i]
+                    second = input[j]
+
+                    fusion = first.matches(second)
+                    
+                    if fusion:
+                        mergingList.append(fusion)
+                        auxInput[first]=1
+                        auxInput[second]=1
+
+            output.update(primeImplicants(auxInput))
+            
+            input = mergingList
+
+        return output
+
+
 
 def primeImplicants(dicImplicants):
     primeList = []
@@ -33,32 +63,6 @@ def primeImplicants(dicImplicants):
             primeList.append(x)
 
     return primeList
-
-def stringApproach(input):
-
-    output = set()
-
-    while(input):
-        auxInput = listToDictionary(input)
-        mergingList = []
-
-        for i in range(0, len(input)-1):
-            for j in range(i+1, len(input)):
-                first = input[i]
-                second = input[j]
-
-                fusion = first.matches(second)
-                
-                if fusion:
-                    mergingList.append(fusion)
-                    auxInput[first]=1
-                    auxInput[second]=1
-
-        output.update(primeImplicants(auxInput))
-        
-        input = mergingList
-
-    return output
 
 def printOutput(input, output):
     print("input", ' '.join(map(str, input))) 
@@ -88,7 +92,7 @@ def main():
 
     input = readBooleanInput("Examples/booleanExample1.txt")
 
-    output = stringApproach(input)
+    output = QuineMcCluskey.execute(input)
 
     printOutput(input, output)
 
