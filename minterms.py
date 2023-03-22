@@ -28,7 +28,7 @@ class BooleanImplicant(Implicant):
     
 class QuineMcCluskey(object):
     @classmethod
-    def execute(input):
+    def execute(self, input):
 
         output = set()
 
