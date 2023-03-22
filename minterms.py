@@ -25,72 +25,79 @@ class BooleanImplicant(Implicant):
 
     def __str__ (self):
         return self.string
+    
+class QuineMcCluskey(object):
+    @classmethod
+    def execute(self, input):
 
-def primeImplicants(dicImplicants):
-    primeList = []
-    for x , y in dicImplicants.items():
-        if y == 0:
-            primeList.append(x)
+        output = set()
 
-    return primeList
+        while(input):
+            auxInput = Resources.listToDictionary(input)
+            mergingList = []
 
-def stringApproach(input):
+            for i in range(0, len(input)-1):
+                for j in range(i+1, len(input)):
+                    first = input[i]
+                    second = input[j]
 
-    output = set()
+                    fusion = first.matches(second)
+                    
+                    if fusion:
+                        mergingList.append(fusion)
+                        auxInput[first]=1
+                        auxInput[second]=1
 
-    while(input):
-        auxInput = listToDictionary(input)
-        mergingList = []
+            output.update(Resources.primeImplicants(auxInput))
+            
+            input = mergingList
 
-        for i in range(0, len(input)-1):
-            for j in range(i+1, len(input)):
-                first = input[i]
-                second = input[j]
+        return output
 
-                fusion = first.matches(second)
-                
-                if fusion:
-                    mergingList.append(fusion)
-                    auxInput[first]=1
-                    auxInput[second]=1
+class Resources(object):
+    
+    @classmethod
+    def primeImplicants(self, dicImplicants):
+        primeList = []
+        for x , y in dicImplicants.items():
+            if y == 0:
+                primeList.append(x)
 
-        output.update(primeImplicants(auxInput))
-        
-        input = mergingList
+        return primeList
 
-    return output
+    @classmethod
+    def printOutput(self, input, output):
+        print("input", ' '.join(map(str, input))) 
+        print("output", ' '.join(map(str, output)))
 
-def printOutput(input, output):
-    print("input", ' '.join(map(str, input))) 
-    print("output", ' '.join(map(str, output)))
+    @classmethod
+    def listToDictionary(self, list):
+        dict = {}
 
+        for element in list:
+            dict[element] = 0
 
-def listToDictionary(list):
-    dict = {}
+        return dict
 
-    for element in list:
-        dict[element] = 0
+    @classmethod
+    def readBooleanInput(self, filename):
+        file = open(filename)
+        lines = file.read().splitlines()
+        input = []
 
-    return dict
+        for line in lines:
+            implicant = BooleanImplicant(line)
+            input.append(implicant)
 
-def readBooleanInput(filename):
-    file = open(filename)
-    lines = file.read().splitlines()
-    input = []
-
-    for line in lines:
-        implicant = BooleanImplicant(line)
-        input.append(implicant)
-
-    return input
+        return input
 
 def main():
 
-    input = readBooleanInput("Examples/booleanExample1.txt")
+    input = Resources.readBooleanInput("Examples/booleanExample1.txt")
 
-    output = stringApproach(input)
+    output = QuineMcCluskey.execute(input)
 
-    printOutput(input, output)
+    Resources.printOutput(input, output)
 
 
 
