@@ -90,14 +90,61 @@ class Resources(object):
             input.append(implicant)
 
         return input
+    
+    @classmethod
+    def readIntervalInput(self, filename):
+        file = open(filename)
+        lines = file.read().splitlines()
+        input = []
+        
+        numVariables = int(lines[0])
+        lines.pop(0)
+
+        setsList = []
+
+        for i in range(numVariables):
+            nuevoSetVariable = set()
+            nuevoSetVariable.update([0, int(lines[0])])
+            lines.pop(0)
+            setsList.append(nuevoSetVariable)
+
+        input.append(setsList)
+
+        for element in lines:
+            x = element.split()
+            tuples = [] 
+            nueva_lista = [x[i:i+2] for i in range(0, len(x), 2)]
+
+            for i in range(numVariables):
+                lista = nueva_lista[i]
+                nuevatupler = []
+
+                for elementer in lista:
+                    input[0][i].add(int(elementer))
+                    nuevatupler.append(int(elementer))
+
+                nuevatupler = tuple(nuevatupler)
+                tuples.append(nuevatupler)
+            
+            input.append(tuples)
+
+        for i in range(numVariables):
+            setordenado = sorted(input[0][i])
+            input[0][i] = setordenado
+
+        return input
 
 def main():
 
-    input = Resources.readBooleanInput("Examples/booleanExample1.txt")
+    #input = Resources.readBooleanInput("Examples/booleanExample1.txt")
 
-    output = QuineMcCluskey.execute(input)
+    #output = QuineMcCluskey.execute(input)
 
-    Resources.printOutput(input, output)
+    #Resources.printOutput(input, output)
+
+    aux_input = Resources.readIntervalInput("Examples/input.txt")
+
+    print(aux_input)
 
 
 
