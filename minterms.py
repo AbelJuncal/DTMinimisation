@@ -26,6 +26,40 @@ class BooleanImplicant(Implicant):
     def __str__ (self):
         return self.string
     
+class IntervalImplicant(Implicant):
+    def __init__(self, list):
+        self.tuple = list
+
+    def matches(self, otherImplicant):
+
+        difference = 0
+        merging = []
+
+        for z in range(len(self.list)):
+
+            if self.list[z] is tuple:
+                if otherImplicant.list[z] is tuple:
+                    if self.list[z][0] == otherImplicant.list[z][0]:
+                        if self.list[z][1] == otherImplicant.list[z][1]:
+                            merging.append("-")
+                            difference += 1
+                        else:
+                            merging.append(self.list[z])
+                    else:
+                        merging.append(self.list[z])
+            else:
+                if otherImplicant.list[z] == "-":
+                    merging.append("-")
+
+        if difference == 1:
+            return IntervalImplicant(merging)
+    
+        return None
+    
+    def __str__ (self):
+        return self.list
+
+    
 class QuineMcCluskey(object):
     @classmethod
     def execute(self, input):
