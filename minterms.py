@@ -53,32 +53,8 @@ class QuineMcCluskey(object):
             input = mergingList
 
         return output
-
-class Resources(object):
     
-    @classmethod
-    def primeImplicants(self, dicImplicants):
-        primeList = []
-        for x , y in dicImplicants.items():
-            if y == 0:
-                primeList.append(x)
-
-        return primeList
-
-    @classmethod
-    def printOutput(self, input, output):
-        print("input", ' '.join(map(str, input))) 
-        print("output", ' '.join(map(str, output)))
-
-    @classmethod
-    def listToDictionary(self, list):
-        dict = {}
-
-        for element in list:
-            dict[element] = 0
-
-        return dict
-
+class ReadInput():
     @classmethod
     def readBooleanInput(self, filename):
         file = open(filename)
@@ -108,8 +84,6 @@ class Resources(object):
             lines.pop(0)
             setsList.append(nuevoSetVariable)
 
-        input.append(setsList)
-
         for element in lines:
             x = element.split()
             tuples = [] 
@@ -120,7 +94,7 @@ class Resources(object):
                 nuevatupler = []
 
                 for elementer in lista:
-                    input[0][i].add(int(elementer))
+                    setsList[i].add(int(elementer))
                     nuevatupler.append(int(elementer))
 
                 nuevatupler = tuple(nuevatupler)
@@ -129,10 +103,37 @@ class Resources(object):
             input.append(tuples)
 
         for i in range(numVariables):
-            setordenado = sorted(input[0][i])
-            input[0][i] = setordenado
+            setordenado = sorted(setsList[i])
+            setsList[i] = setordenado
+
+        self.stages = setsList
 
         return input
+
+class Resources(object):
+    
+    @classmethod
+    def primeImplicants(self, dicImplicants):
+        primeList = []
+        for x , y in dicImplicants.items():
+            if y == 0:
+                primeList.append(x)
+
+        return primeList
+
+    @classmethod
+    def printOutput(self, input, output):
+        print("input", ' '.join(map(str, input))) 
+        print("output", ' '.join(map(str, output)))
+
+    @classmethod
+    def listToDictionary(self, list):
+        dict = {}
+
+        for element in list:
+            dict[element] = 0
+
+        return dict
 
 def main():
 
@@ -142,7 +143,7 @@ def main():
 
     #Resources.printOutput(input, output)
 
-    aux_input = Resources.readIntervalInput("Examples/input.txt")
+    aux_input = ReadInput.readIntervalInput("Examples/input.txt")
 
     print(aux_input)
 
