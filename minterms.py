@@ -28,7 +28,7 @@ class BooleanImplicant(Implicant):
     
 class IntervalImplicant(Implicant):
     def __init__(self, list):
-        self.tuple = list
+        self.list = list
 
     def matches(self, otherImplicant):
 
@@ -37,16 +37,16 @@ class IntervalImplicant(Implicant):
 
         for z in range(len(self.list)):
 
-            if self.list[z] is tuple:
-                if otherImplicant.list[z] is tuple:
-                    if self.list[z][0] == otherImplicant.list[z][0]:
-                        if self.list[z][1] == otherImplicant.list[z][1]:
-                            merging.append("-")
-                            difference += 1
-                        else:
-                            merging.append(self.list[z])
-                    else:
+            if isinstance(self.list[z] , tuple):
+                if isinstance(otherImplicant.list[z] , tuple):
+                    if self.list[z][0] == otherImplicant.list[z][0] and self.list[z][1] == otherImplicant.list[z][1]:
                         merging.append(self.list[z])
+                    elif self.list[z][1] >= otherImplicant.list[z][0] and self.list[z][0] <= otherImplicant.list[z][1]:
+                        interval = (min(self.list[z][0],otherImplicant.list[z][0]), max(self.list[z][1], otherImplicant.list[z][1]))
+                        merging.append(interval)
+                    else:
+                        merging.append("-")
+                        difference += 1
             else:
                 if otherImplicant.list[z] == "-":
                     merging.append("-")
@@ -57,7 +57,7 @@ class IntervalImplicant(Implicant):
         return None
     
     def __str__ (self):
-        return self.list
+        return str(self.list)
 
     
 class QuineMcCluskey(object):
@@ -133,8 +133,8 @@ class ReadInput():
 
                 nuevatupler = tuple(nuevatupler)
                 tuples.append(nuevatupler)
-            
-            input.append(tuples)
+
+            input.append(IntervalImplicant(tuples))
 
         for i in range(numVariables):
             setordenado = sorted(setsList[i])
@@ -177,11 +177,10 @@ def main():
 
     #Resources.printOutput(input, output)
 
-    aux_input = ReadInput.readIntervalInput("Examples/input.txt")
+    input = ReadInput.readIntervalInput("Examples/input3.txt")
 
-    print(aux_input)
-
-
+    output = QuineMcCluskey.execute(input)
+    Resources.printOutput(input, output)
 
 
 if __name__ == "__main__":
