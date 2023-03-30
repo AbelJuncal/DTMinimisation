@@ -25,10 +25,26 @@ class IntervalImplicant(Implicant):
                 if otherImplicant.list[z] == "-":
                     merging.append("-")
 
-        if difference == 1:
+        if difference <= 1:
             return IntervalImplicant(merging)
     
         return None
+    
+    def unfold(self, tuple, variableStage, newImplicant = []):
+        if(tuple!=[]):
+            start = tuple[0][0]
+            end = tuple[0][1]
+
+            actualIndex = variableStage[0].index(start)
+            endIndex = variableStage[0].index(end)
+
+            while actualIndex != endIndex:
+                firstElement = variableStage[0][actualIndex]
+                actualIndex += 1
+                secondElement = variableStage[0][actualIndex]
+                newImplicant.append((firstElement, secondElement))
+                print("newImplicant", newImplicant)
+                self.unfold(tuple[1:], variableStage[1:], newImplicant)
     
     def __str__ (self):
         return str(self.list)

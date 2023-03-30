@@ -3,9 +3,17 @@ from quineMcCluskey import *
 
 def main():
 
-    input = ReadInput.readIntervalInput("Examples/input3.txt")
+    readInput = ReadInput()
+
+    input = readInput.readIntervalInput("Examples/input.txt")
 
     output = QuineMcCluskey.execute(input)
+
+    newImplicants = []
+
+    for element in input:
+        print(element)
+        element.unfold(element.list, readInput.stages)
     
     Resources.printOutput(input, output)
 
