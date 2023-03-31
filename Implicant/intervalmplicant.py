@@ -30,21 +30,19 @@ class IntervalImplicant(Implicant):
     
         return None
     
-    def unfold(self, tuple, variableStage, newImplicant = []):
-        if(tuple!=[]):
+    def unfold(self, tuple, variableStage):
+        if(tuple==[]):
+            yield []
+        else:
             start = tuple[0][0]
             end = tuple[0][1]
+            steps=variableStage[0]
+            i = steps.index(start)
 
-            actualIndex = variableStage[0].index(start)
-            endIndex = variableStage[0].index(end)
-
-            while actualIndex != endIndex:
-                firstElement = variableStage[0][actualIndex]
-                actualIndex += 1
-                secondElement = variableStage[0][actualIndex]
-                newImplicant.append((firstElement, secondElement))
-                print("newImplicant", newImplicant)
-                self.unfold(tuple[1:], variableStage[1:], newImplicant)
+            while steps[i]!=end:
+                i=i+1
+                for imp in self.unfold(tuple[1:], variableStage[1:]):
+                    yield [(steps[i], steps[i+1])]+imp
     
     def __str__ (self):
         return str(self.list)

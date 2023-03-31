@@ -12,8 +12,9 @@ def main():
     newImplicants = []
 
     for element in input:
-        print(element)
-        element.unfold(element.list, readInput.stages)
+        print("PARA EL IMP", element)
+        for imp in element.unfold(element.list, readInput.stages):
+            print(imp)
     
     Resources.printOutput(input, output)
 
