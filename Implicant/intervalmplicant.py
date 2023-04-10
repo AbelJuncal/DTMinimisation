@@ -18,14 +18,12 @@ class IntervalImplicant(Implicant):
                     elif self.list[z][1] >= otherImplicant.list[z][0] and self.list[z][0] <= otherImplicant.list[z][1]:
                         interval = (min(self.list[z][0],otherImplicant.list[z][0]), max(self.list[z][1], otherImplicant.list[z][1]))
                         merging.append(interval)
-                    else:
-                        merging.append("-")
                         difference += 1
-            else:
-                if otherImplicant.list[z] == "-":
-                    merging.append("-")
+                    else:
+                        return None
 
         if difference == 1:
+            print("match")
             return IntervalImplicant(merging)
     
         return None
