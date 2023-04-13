@@ -10,7 +10,6 @@ class IntervalImplicant(Implicant):
         merging = []
 
         for z in range(len(self.list)):
-
             if isinstance(self.list[z] , tuple):
                 if isinstance(otherImplicant.list[z] , tuple):
                     if self.list[z][0] == otherImplicant.list[z][0] and self.list[z][1] == otherImplicant.list[z][1]:
@@ -27,19 +26,28 @@ class IntervalImplicant(Implicant):
     
         return None
     
+    def stagger(self, variableStage):
+        unfolds = self.unfold(self.list, variableStage)
+        result = []
+
+        for imp in unfolds:
+            result.append(IntervalImplicant(imp))
+
+        return result
+    
     def unfold(self, tuple, variableStage):
         if(tuple==[]):
             yield []
         else:
             start = tuple[0][0]
             end = tuple[0][1]
-            steps=variableStage[0]
+            steps = variableStage[0]
             i = steps.index(start)
 
             while steps[i]!=end:
-                i=i+1
                 for imp in self.unfold(tuple[1:], variableStage[1:]):
                     yield [(steps[i], steps[i+1])]+imp
+                i=i+1
     
     def __str__ (self):
         return str(self.list)
