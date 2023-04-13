@@ -18,5 +18,7 @@ def main():
     
     Resources.printOutput(input, output)
 
+    Resources.examplesGenerator()
+
 if __name__ == "__main__":
     main()
