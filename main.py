@@ -9,14 +9,16 @@ def main():
 
     print("input", ' '.join(map(str, input))) 
 
-    newImplicants = []
+    newImplicants = set()
 
     for element in input:
-        newImplicants.extend(element.stagger(readInput.stages))
+        newImplicants.update(element.unfold(readInput.stages))
 
-    print("newImplicants", ' '.join(map(str, newImplicants))) 
+    print("newImplicants", '\n'.join(map(str, newImplicants))) 
 
-    output = QuineMcCluskey.execute(newImplicants)
+    output = QuineMcCluskey.execute(list(newImplicants))
+
+    print(len(newImplicants))
     
     Resources.printOutput(newImplicants, output)
 

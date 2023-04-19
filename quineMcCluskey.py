@@ -17,7 +17,7 @@ class QuineMcCluskey(object):
 
                     fusion = first.matches(second)
                     
-                    if fusion:
+                    if fusion is not None:
                         mergingList.append(fusion)
                         auxInput[first]=1
                         auxInput[second]=1
