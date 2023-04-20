@@ -7,16 +7,20 @@ def main():
 
     input = readInput.readIntervalInput("Examples/input.txt")
 
-    output = QuineMcCluskey.execute(input)
+    print("input", ' '.join(map(str, input))) 
 
-    newImplicants = []
+    newImplicants = set()
 
     for element in input:
-        print("PARA EL IMP", element)
-        for imp in element.unfold(element.list, readInput.stages):
-            print(imp)
+        newImplicants.update(element.unfold(readInput.stages))
+
+    print("newImplicants", '\n'.join(map(str, newImplicants))) 
+
+    output = QuineMcCluskey.execute(list(newImplicants))
+
+    print(len(newImplicants))
     
-    Resources.printOutput(input, output)
+    Resources.printOutput(newImplicants, output)
 
 if __name__ == "__main__":
     main()
