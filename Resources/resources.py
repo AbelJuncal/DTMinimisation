@@ -22,12 +22,3 @@ class Resources(object):
             dict[element] = 0
 
         return dict
-    
-    @classmethod
-    def examplesGenerator(self, nVars = 2, maxnThres = 5, nImpl = 4):
-        N = 100
-
-        escalones = list(range(0, N, int(N/maxnThres)))
-
-        print(escalones)
-

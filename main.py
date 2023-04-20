@@ -1,24 +1,14 @@
 from Resources.readInput import *
+from Resources.intervalsGenerator import *
 from quineMcCluskey import *
 
 def main():
+    generator = IntervalsGenerator()
 
-    readInput = ReadInput()
+    generatedImplicants = generator.generate()
 
-    input = readInput.readIntervalInput("Examples/input.txt")
-
-    output = QuineMcCluskey.execute(input)
-
-    newImplicants = []
-
-    for element in input:
-        print("PARA EL IMP", element)
-        for imp in element.unfold(element.list, readInput.stages):
-            print(imp)
-    
-    Resources.printOutput(input, output)
-
-    Resources.examplesGenerator()
+    print("stages:", generator.stages)
+    print("implicants: ", ' '.join(map(str, generatedImplicants)))
 
 if __name__ == "__main__":
     main()
