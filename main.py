@@ -8,7 +8,7 @@ def main():
     generatedImplicants = generator.generate()
 
     print("stages:", generator.stages)
-    print("implicants: ", ' '.join(map(str, generatedImplicants)))
+    print("implicants: ", '\n'.join(map(str, generatedImplicants)))
 
 if __name__ == "__main__":
     main()
