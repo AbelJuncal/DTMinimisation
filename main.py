@@ -8,10 +8,21 @@ def main():
     readInput = ReadInput()
 
     input = readInput.readIntervalInput("GeneratedExamples/" + sys.argv[1])
+
+    print("input", ' '.join(map(str, input))) 
+
+    newImplicants = set()
+
+    for element in input:
+        newImplicants.update(element.unfold(readInput.stages))
+
+    print("newImplicants", '\n'.join(map(str, newImplicants))) 
+
+    output = QuineMcCluskey.execute(list(newImplicants))
+
+    print(len(newImplicants))
     
-    output = QuineMcCluskey.execute(input)
-    
-    Resources.printOutput(input, output)
+    Resources.printOutput(newImplicants, output)
 
     filename = sys.argv[1]
 

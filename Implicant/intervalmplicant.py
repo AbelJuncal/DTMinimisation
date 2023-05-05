@@ -9,16 +9,15 @@ class IntervalImplicant(Implicant):
         difference = 0
         merging = []
 
-        for z in range(len(self.list)):
+        for v in range(len(self.list)):
+                    a, b = self.list[v]
+                    c, d = otherImplicant.list[v]
 
-            if isinstance(self.list[z] , tuple):
-                if isinstance(otherImplicant.list[z] , tuple):
-                    if self.list[z][0] == otherImplicant.list[z][0] and self.list[z][1] == otherImplicant.list[z][1]:
-                        merging.append(self.list[z])
-                    elif self.list[z][1] >= otherImplicant.list[z][0] and self.list[z][0] <= otherImplicant.list[z][1]:
-                        interval = (min(self.list[z][0],otherImplicant.list[z][0]), max(self.list[z][1], otherImplicant.list[z][1]))
+                    if b >= c and a <= d:
+                        interval = (min(a,c), max(b, d))
                         merging.append(interval)
-                        difference += 1
+                        if a != c or b != d:
+                            difference += 1
                     else:
                         return None
 
@@ -27,19 +26,35 @@ class IntervalImplicant(Implicant):
     
         return None
     
-    def unfold(self, tuple, variableStage):
+    def unfold(self, variableStage):
+        unfolds = self.unfoldTuple(self.list, variableStage)
+        result = set()
+
+        for imp in unfolds:
+            
+            result.add(IntervalImplicant(imp))
+
+        return result
+    
+    def unfoldTuple(self, tuple, variableStage):
         if(tuple==[]):
             yield []
         else:
             start = tuple[0][0]
             end = tuple[0][1]
-            steps=variableStage[0]
+            steps = variableStage[0]
             i = steps.index(start)
 
             while steps[i]!=end:
-                i=i+1
-                for imp in self.unfold(tuple[1:], variableStage[1:]):
+                for imp in self.unfoldTuple(tuple[1:], variableStage[1:]):
                     yield [(steps[i], steps[i+1])]+imp
+                i=i+1
     
     def __str__ (self):
-        return str(self.list)
+        return f'{str(self.list)} hash:{self.__hash__()}'
+
+    def __hash__ (self):
+        return hash(str(self.list))
+
+    def __eq__ (self, other) -> bool:
+        return self.list == other.list
