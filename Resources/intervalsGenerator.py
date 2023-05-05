@@ -10,15 +10,22 @@ class IntervalsGenerator(object):
         stagesList = []
         implicantList = []
 
+        maxStages = 0
+
         for _ in range (nVars):
             numStages = random.randint(2, maxnThres)
+
             stages = list(range(0, N+1, math.ceil(N/numStages)))
 
             if(len(stages)==numStages):
                 stages.append(100)
             stagesList.append(stages)
 
+            if(len(stages)-1 > maxStages):
+                maxStages = len(stages)-1
+
         self.stages = stagesList
+        self.maxStages = maxStages
 
         for _ in range(nImpl):
             implicant = []
