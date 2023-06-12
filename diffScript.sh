@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirsource="PyOutput/"
-dirdestination="prolog/prologOutput/"
+dirdestination="prologOutput/"
 
 for filename in $(ls $dirsource)
 do 
