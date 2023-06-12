@@ -2,6 +2,7 @@
 
 dirsource="GeneratedExamples/"
 dirdestination="prologOutput/"
+direxecutable="prolog/"
 
 for filename in $(ls $dirsource)
 do 
