@@ -7,8 +7,8 @@ class QuineMcCluskey(object):
         output = set()
 
         while(input):
-            auxInput = Resources.listToDictionary(input)
-            mergingList = []
+            auxInput = {element: 0 for element in input}
+            mergingSet = set()
 
             for i in range(0, len(input)-1):
                 for j in range(i+1, len(input)):
@@ -18,12 +18,12 @@ class QuineMcCluskey(object):
                     fusion = first.matches(second)
                     
                     if fusion is not None:
-                        mergingList.append(fusion)
+                        mergingSet.add(fusion)
                         auxInput[first]=1
                         auxInput[second]=1
 
             output.update(Resources.primeImplicants(auxInput))
             
-            input = mergingList
+            input = list(mergingSet)
 
         return output

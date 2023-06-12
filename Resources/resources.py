@@ -11,8 +11,8 @@ class Resources(object):
 
     @classmethod
     def printOutput(self, input, output):
-        print("input", '\n'.join(map(str, input))) 
-        print("output", '\n'.join(map(str, output)))
+        print("input\n", '\n'.join(map(str, input))) 
+        print("output\n", '\n'.join(map(str, output)))
 
     @classmethod
     def listToDictionary(self, list):

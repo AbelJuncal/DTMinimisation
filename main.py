@@ -1,33 +1,30 @@
 from Resources.readInput import *
 from Resources.intervalsGenerator import *
 from quineMcCluskey import *
+import sys
 
 def main():
-    generator = IntervalsGenerator()
 
     readInput = ReadInput()
 
-    input = readInput.readIntervalInput("Examples/input.txt")
-
-    print("input", ' '.join(map(str, input))) 
+    input = readInput.readIntervalInput('GeneratedExamples/' + sys.argv[1]) 
 
     newImplicants = set()
 
     for element in input:
         newImplicants.update(element.unfold(readInput.stages))
 
-    print("newImplicants", '\n'.join(map(str, newImplicants))) 
-
     output = QuineMcCluskey.execute(list(newImplicants))
-
-    print(len(newImplicants))
     
-    Resources.printOutput(newImplicants, output)
+    filename = sys.argv[1]
 
-    generatedImplicants = generator.generate()
+    with open('PyOutput/' + filename, 'w') as f:
+        for implicant in list(output):
+            for tuple in implicant.list:
+                    for number in tuple:
+                        f.write(str(number) + " ")
+            f.write("\n")
 
-    print("stages:", generator.stages)
-    print("implicants: ", ' '.join(map(str, generatedImplicants)))
 
 if __name__ == "__main__":
     main()

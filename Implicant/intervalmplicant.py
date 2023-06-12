@@ -31,7 +31,6 @@ class IntervalImplicant(Implicant):
         result = set()
 
         for imp in unfolds:
-            
             result.add(IntervalImplicant(imp))
 
         return result
@@ -51,7 +50,7 @@ class IntervalImplicant(Implicant):
                 i=i+1
     
     def __str__ (self):
-        return f'{str(self.list)} hash:{self.__hash__()}'
+        return f'{str(self.list)}'
 
     def __hash__ (self):
         return hash(str(self.list))
