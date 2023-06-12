@@ -70,6 +70,7 @@ min(Xs) :-
     interv(0,NV1,Vars),
     repeat, (member(N,Vars), get_thresholds(Xs,N,Ts), assertz(thresholds(N,Ts)), fail; !),
     repeat, (member(X,Xs),unfold(0,X,Y),add_implicate(Y),fail; !),
+    (debug,!,repeat, (implicate(W,_), write_implicate(W),nl,fail; !); true),
     repeat, (
         findall(XX,implicate(XX,prime),XXs),msg(['New iteration ---- ']),iteration(XXs,NN),NN=0,!),
     repeat,
@@ -83,9 +84,15 @@ main_c :- unix(argv(Argv)),
         ; main(Argv)).
 
 % if no arguments, print help
-main([]):- !,  write('Input file name required.'),nl,halt(0).
+main([]):- !, 
+   write('mindt [-d] filename'),nl,
+   write('      -d = debug'),nl,
+   halt(0).
 
-main([Fname|_]):-
+main(Args):-
+    (Args=['-d',Fname|_],!,assert(debug)
+    ;Args=[Fname|_]
+    ),
     loadfile(Fname,Xs),
     min(Xs).
 
@@ -98,13 +105,15 @@ loadfile(Fname,L) :-
 
 read_terms(Fd,Clauses,ClausesN):-
 	read_string(Fd,"\n","",End,String),
-	(End= -1,ClausesN=Clauses,!
-	   
-	; split_string(String," ","",L),
-      maplist(number_string,L1,L),
-      topairs(L1,Clause),
-	  read_terms(Fd,[Clause|Clauses],ClausesN)
-	).
+  normalize_space(string(Str2),String),
+  string_length(Str2,SL),
+  (SL=0,!,Clauses2=Clauses
+  ; split_string(Str2," ","",L),
+    maplist(number_string,L1,L),
+    topairs(L1,Clause),
+    Clauses2=[Clause|Clauses]
+  ),
+	(End= -1,ClausesN=Clauses2,!; read_terms(Fd,Clauses2,ClausesN)).
 
 skiplines(_,0) :- !.
 skiplines(Fd,N) :- read_string(Fd,"\n","",_,_),N1 is N-1, skiplines(Fd,N1).

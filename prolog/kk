@@ -1,6 +1,0 @@
-wet.
-{spark}.
-{fire} :- spark.
-:- wet, fire.
-empty.
-fill :- empty, not fire.
