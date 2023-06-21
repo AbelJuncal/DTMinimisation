@@ -14,6 +14,17 @@ def main():
     for element in input:
         newImplicants.update(element.unfold(readInput.stages))
 
+    #MFC = 1
+
+    #for variableStage in readInput.stages:
+    #    MFC = MFC * (len(variableStage)-1)
+         
+    
+    #print(readInput.stages)
+    #print("MFC number is ", MFC)
+    #print("FC number is ", len(newImplicants))
+    #print("Covered lines ", (len(newImplicants)/MFC)*100, "%")
+
     output = QuineMcCluskey.execute(list(newImplicants))
     
     filename = sys.argv[1]
