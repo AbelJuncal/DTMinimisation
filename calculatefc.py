@@ -4,10 +4,13 @@ from quineMcCluskey import *
 import sys
 
 def main():
+    if(len(sys.argv) < 3):
+        print("Please give a testFolder")
+        return
 
     readInput = ReadInput()
 
-    input = readInput.readIntervalInput('GeneratedExamples/' + sys.argv[1]) 
+    input = readInput.readIntervalInput('tests/'+sys.argv[1]+'/GeneratedExamples/' + sys.argv[2]) 
 
     newImplicants = set()
 

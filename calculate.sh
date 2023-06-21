@@ -1,12 +1,14 @@
 #!/bin/bash
 
-dirsource="GeneratedExamples/"
-output_file="times/pythonTimes.txt"
+echo -n "Folder test:"
+read testFolder
+
+dirsource="tests/$testFolder/GeneratedExamples/"
 
 for i in {1..5}; do
 for filename in $(ls $dirsource)
 do
-    python3 calculatefc.py $filename
-    echo $filename 
+    echo $filename
+    python3 calculatefc.py $testFolder $filename
 done
 done
