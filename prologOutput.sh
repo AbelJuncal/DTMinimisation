@@ -3,16 +3,15 @@
 echo -n "Folder test:"
 read testFolder
 
-dirsource="tests/$testFolder/PyOutput/"
+dirsource="tests/$testFolder/GeneratedExamples/"
 dirdestination="tests/$testFolder/prologOutput/"
 
-#dirsource="PyOutput/"
-#dirdestination="prologOutput/"
+direxecutable="prolog/"
 
 for filename in $(ls $dirsource)
-do 
+do
+    echo $filename
     inputname=$dirsource$filename
     outputname=$dirdestination$filename
-    echo Comparando $inputname with $outputname
-    diff <(sort $inputname) <(sort $outputname)
+    ./${direxecutable}mindt $inputname > $outputname
 done
