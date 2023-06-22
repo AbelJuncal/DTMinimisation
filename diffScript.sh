@@ -1,7 +1,13 @@
 #!/bin/bash
 
-dirsource="PyOutput/"
-dirdestination="prologOutput/"
+echo -n "Folder test:"
+read testFolder
+
+dirsource="tests/$testFolder/PyOutput/"
+dirdestination="tests/$testFolder/prologOutput/"
+
+#dirsource="PyOutput/"
+#dirdestination="prologOutput/"
 
 for filename in $(ls $dirsource)
 do 

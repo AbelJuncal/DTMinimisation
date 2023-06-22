@@ -1,9 +1,13 @@
 #!/bin/bash
 
-dirsource="GeneratedExamples/"
-dirdestination="prologOutput/"
+echo -n "Folder test:"
+read testFolder
+
+dirsource="tests/$testFolder/GeneratedExamples/"
+output_file="tests/$testFolder/times/prologTimes.txt"
+
+
 direxecutable="prolog/"
-output_file="times/prologTimes.txt"
 
 for i in {1..5}; do
 for filename in $(ls $dirsource)

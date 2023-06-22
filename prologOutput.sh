@@ -1,7 +1,11 @@
 #!/bin/bash
 
-dirsource="GeneratedExamples/"
-dirdestination="prologOutput/"
+echo -n "Folder test:"
+read testFolder
+
+dirsource="tests/$testFolder/GeneratedExamples/"
+dirdestination="tests/$testFolder/prologOutput/"
+
 direxecutable="prolog/"
 
 for filename in $(ls $dirsource)
