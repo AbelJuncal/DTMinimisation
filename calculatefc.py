@@ -21,8 +21,10 @@ def main():
 
     for variableStage in readInput.stages:
         MFC = MFC * (len(variableStage)-1)
-         
-    
+
+    with open('tests/'+sys.argv[1]+'/times/fc.txt', 'a') as f:
+        f.write(sys.argv[2] + ',' + str(len(newImplicants)) + ',' + str(MFC)+'\n')
+
     print(readInput.stages)
     print("MFC number is ", MFC)
     print("FC number is ", len(newImplicants))
