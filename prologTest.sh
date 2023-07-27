@@ -14,7 +14,7 @@ for filename in $(ls $dirsource)
 do
     echo $filename
     inputname=$dirsource$filename
-    execution_time=$( { time ${direxecutable}mindt $inputname ; } 2>&1 | grep "real" | awk '{print $2}' )
+    execution_time=$(timeout 120 bash -c "execution_time=\$( { time ${direxecutable}mindt $inputname ; } 2>&1 | grep 'real' | awk '{print \$2}' ); echo \$execution_time")
     echo "$filename.$execution_time" >> "$output_file"
 done
 done
