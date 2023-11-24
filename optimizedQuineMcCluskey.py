@@ -5,42 +5,6 @@ class OptimizedQuineMcCluskey(QuineMcCluskey):
     @classmethod
     def execute(self, input, inputStages):
 
-        # groups = {}
-
-        # #hago los grupos
-        # for i in range(0, len(input)-1):
-            
-        #     implicant = input[i]
-
-        #     sum = 0
-
-        #     for interval in implicant.list:
-        #         sum = sum + interval[0]
-
-        #     if sum in groups:
-        #         groups[sum].append(implicant)
-        #     else:
-        #         groups[sum] = [implicant]
-
-        # myKeys = list(groups.keys())
-        # myKeys.sort()
-        # sorted_dict = {i: groups[i] for i in myKeys}
-
-        # #Hasta aquí todo bien, hay que fusionar os que poden machear
-
-        # maxDiff = max(len(sub) for sub in inputStages) - 1
-
-        # items = list(sorted_dict.items())
-
-        # for i in range(len(items)-1):
-        #     clave_actual, valor_actual = items[i]
-        #     mergeList = valor_actual
-        #     for j in range(i+1, len(items)):
-        #         clave_siguiente, valor_siguiente = items[j]
-
-        #         if(abs(clave_actual-clave_siguiente)<=maxDiff):
-        #             mergeList.append(valor_siguiente)
-
         #Calculamos suma de mínimos
 
         input_sumas = []
@@ -92,9 +56,6 @@ class OptimizedQuineMcCluskey(QuineMcCluskey):
             input = list(mergingSet)
             input.sort(key=lambda x: x[0])
 
-        auxOutput = set()
-
-        #"Desnormalizar" os resultados
         auxOutput = []
 
         for implicant in list(output):
