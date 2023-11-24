@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mindt_Selino"
+version = "0.0.1.dev1"
+authors = [
+  { name="Abel Juncal Suárez", email="abeljuncalsuarez@gmail.com" },
+]
+description = "This package allow to minimize the output from a given Decision Tree."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pandas",
+    "seaborn",
+    "matplotlib"
+]
+
+[project.urls]
+Homepage = "https://github.com/AbelJuncal/DTMinimisation"
+Issues = "https://github.com/AbelJuncal/DTMinimisation/issues"
