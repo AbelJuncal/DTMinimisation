@@ -7,7 +7,7 @@ def main():
 
     readInput = ReadInput()
 
-    input = readInput.readIntervalInput('tests/test2/GeneratedExamples/' + sys.argv[1]) 
+    input = readInput.readIntervalInput('tests/'+sys.argv[1]+'/GeneratedExamples/' + sys.argv[2]) 
 
     newImplicants = set()
 
@@ -16,9 +16,9 @@ def main():
 
     output = QuineMcCluskey.execute(list(newImplicants))
     
-    filename = sys.argv[1]
+    filename = sys.argv[2]
 
-    with open('tests/test2/PyOutput/' + filename, 'w') as f:
+    with open('tests/'+sys.argv[1]+'/PyOutput/' + filename, 'w') as f:
         for implicant in list(output):
             for tuple in implicant.list:
                     for number in tuple:
