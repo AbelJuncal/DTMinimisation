@@ -25,7 +25,7 @@ class DtMinimisation():
 
         self.input = input
         self.staggeredImplicants = staggeredImplicants
-        self.output = output
+        self.output = list(output)
 
     def printInput(self):
         print("Input implicants for the Decision Tree minimizer:\n")
@@ -47,3 +47,11 @@ class DtMinimisation():
 
     def saveOutputInFile(self, path):
         print("Saving output in " + path)
+
+        with open(path, 'w') as f:
+            for implicant in self.output:
+                for tuple in implicant.list:
+                        for number in tuple:
+                            f.write(str(number) + " ")
+                f.write("\n")
+
