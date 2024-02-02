@@ -1,4 +1,4 @@
-from Implicant.implicant import *
+from mindt_Selino.Implicant.implicant import *
 
 class BooleanImplicant(Implicant):
     def __init__(self, string):

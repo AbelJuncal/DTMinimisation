@@ -1,6 +1,6 @@
-from Implicant.booleanImplicant import *
-from Implicant.intervalmplicant import *
-from Implicant.optimizedintervalImplicant import *
+from mindt_Selino.Implicant.booleanImplicant import *
+from mindt_Selino.Implicant.intervalmplicant import *
+from mindt_Selino.Implicant.optimizedintervalImplicant import *
 
 class ReadInput():
     @classmethod

@@ -1,4 +1,4 @@
-from Resources.resources import *
+from mindt_Selino.Resources.resources import *
 
 class QuineMcCluskey(object):
     @classmethod

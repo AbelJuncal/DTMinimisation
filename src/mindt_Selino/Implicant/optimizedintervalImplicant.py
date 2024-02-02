@@ -1,4 +1,4 @@
-from Implicant.intervalmplicant import *
+from mindt_Selino.Implicant.intervalmplicant import *
 
 class optimizedIntervalImplicant(IntervalImplicant):
     def unfold(self, variableStage):

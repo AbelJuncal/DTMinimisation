@@ -1,6 +1,6 @@
-from Resources.readInput import *
-from Resources.intervalsGenerator import *
-from quineMcCluskey import *
+from mindt_Selino.Resources.readInput import *
+from mindt_Selino.Resources.intervalsGenerator import *
+from mindt_Selino.quineMcCluskey import *
 import sys
 
 implicant = IntervalImplicant([(0,3), (2,4), (5,6)])

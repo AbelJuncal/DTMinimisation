@@ -1,5 +1,5 @@
-from quineMcCluskey import *
-from Implicant.intervalmplicant import *
+from mindt_Selino.quineMcCluskey import *
+from mindt_Selino.Implicant.intervalmplicant import *
 
 class OptimizedQuineMcCluskey(QuineMcCluskey):
     @classmethod

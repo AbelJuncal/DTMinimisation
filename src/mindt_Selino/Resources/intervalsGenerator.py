@@ -1,6 +1,6 @@
 import math
 import random
-from Implicant.intervalmplicant import *
+from mindt_Selino.Implicant.intervalmplicant import *
 
 class IntervalsGenerator(object):
     @classmethod

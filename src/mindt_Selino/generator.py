@@ -1,5 +1,5 @@
 import sys
-from Resources.intervalsGenerator import *
+from mindt_Selino.Resources.intervalsGenerator import *
 
 def main():
     arguments = sys.argv

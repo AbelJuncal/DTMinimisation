@@ -1,6 +1,6 @@
-from Resources.readInput import *
-from Resources.intervalsGenerator import *
-from optimizedQuineMcCluskey import *
+from mindt_Selino.Resources.readInput import *
+from mindt_Selino.Resources.intervalsGenerator import *
+from mindt_Selino.optimizedQuineMcCluskey import *
 import sys
 
 def main():

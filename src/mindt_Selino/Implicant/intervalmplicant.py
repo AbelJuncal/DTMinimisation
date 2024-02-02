@@ -1,4 +1,4 @@
-from Implicant.implicant import *
+from mindt_Selino.Implicant.implicant import *
 
 class IntervalImplicant(Implicant):
     def __init__(self, list):
