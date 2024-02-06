@@ -1,6 +1,6 @@
-from mindt_Selino.dtMinimisation import DtMinimisation
+from mindt_Selino.dtMinOptimized import DtMinOptimized
 
-minimization = DtMinimisation("tests/test2/GeneratedExamples/ex.5_3_10")
+minimization = DtMinOptimized("tests/test2/GeneratedExamples/ex.5_3_10")
 
 minimization.printInput()
 
