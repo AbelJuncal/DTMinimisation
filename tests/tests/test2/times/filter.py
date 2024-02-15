@@ -47,7 +47,7 @@ optimized_without_timeout = prueba[prueba['optimized'] != 0.0]
 #Sen Heurística vs optimized
 
 
-fig4 = plt.figure(figsize=(10,8))
+fig4 = plt.figure(figsize=(10,10))
 
 ax4 = fig4.add_subplot(1,1,1)
 
@@ -58,6 +58,8 @@ sns.scatterplot(x='optimized', y='python', data=python_without_timeout)
 ax4.set_xlim(left=0,right=3600)
 ax4.set_ylim(bottom = 0, top=3600)
 
+ax4.plot(ax4.get_xlim(), ax4.get_ylim(), linestyle='--')
+
 plt.xlabel('Con Heurística')
 plt.ylabel("Sen Heurística")
 
@@ -65,7 +67,7 @@ plt.xticks(rotation=90)
 
 #
 
-fig3 = plt.figure(figsize=(10,8))
+fig3 = plt.figure(figsize=(10,10))
 
 ax3 = fig3.add_subplot(1,1,1)
 
@@ -76,6 +78,8 @@ sns.scatterplot(x='prolog', y='python', data=python_without_timeout)
 ax3.set_xlim(left=0,right=3600)
 ax3.set_ylim(bottom = 0, top=3600)
 
+ax3.plot(ax3.get_xlim(), ax3.get_ylim(), linestyle='--')
+
 plt.xlabel('Prolog')
 plt.ylabel("Sen Heurística")
 
@@ -83,7 +87,7 @@ plt.xticks(rotation=90)
 
 #
 
-fig5 = plt.figure(figsize=(10,8))
+fig5 = plt.figure(figsize=(10,10))
 
 ax5 = fig5.add_subplot(1,1,1)
 
@@ -94,6 +98,8 @@ sns.scatterplot(x='prolog', y='python', data=python_without_timeout)
 ax5.set_xlim(left=0,right=500)
 ax5.set_ylim(bottom = 0, top=500)
 
+ax5.plot(ax5.get_xlim(), ax5.get_ylim(), linestyle='--')
+
 plt.xlabel('Prolog')
 plt.ylabel("Sen Heurística")
 
@@ -101,7 +107,7 @@ plt.xticks(rotation=90)
 
 #
 
-fig2 = plt.figure(figsize=(10,8))
+fig2 = plt.figure(figsize=(10,10))
 
 ax2 = fig2.add_subplot(1,1,1)
 
@@ -112,6 +118,8 @@ sns.scatterplot(x='prolog', y='optimized', data=python_without_timeout)
 ax2.set_xlim(left=0,right=3600)
 ax2.set_ylim(bottom = 0, top=3600)
 
+ax2.plot(ax2.get_xlim(), ax2.get_ylim(), linestyle='--')
+
 plt.xlabel('Prolog')
 plt.ylabel("Con heurística")
 
@@ -119,7 +127,7 @@ plt.xticks(rotation=90)
 
 #
 
-fig6 = plt.figure(figsize=(10,8))
+fig6 = plt.figure(figsize=(10,10))
 
 ax6 = fig6.add_subplot(1,1,1)
 
@@ -129,6 +137,8 @@ sns.scatterplot(x='prolog', y='optimized', data=python_without_timeout)
 
 ax6.set_xlim(left=0,right=500)
 ax6.set_ylim(bottom = 0, top=500)
+
+ax6.plot(ax6.get_xlim(), ax6.get_ylim(), linestyle='--')
 
 plt.xlabel('Prolog')
 plt.ylabel("Con heurística")
@@ -141,16 +151,18 @@ re = pd.read_csv('dt.csv')
 re['optimized'] = re['optimized'].apply(tiempo_a_segundos)
 re['python'] = re['python'].apply(tiempo_a_segundos)
 
-fig = plt.figure(figsize=(10,8))
+fig = plt.figure(figsize=(10,10))
 
 ax = fig.add_subplot(1,1,1)
 
-ax.set_title('Árboles reales')
+ax.set_title('Árbores reais')
 
 sns.scatterplot(x='python', y='optimized', data=re)
 
 ax.set_xlim(left=0,right=3600)
 ax.set_ylim(bottom = 0, top = 3600)
+
+ax.plot(ax.get_xlim(), ax.get_ylim(), linestyle='--')
 
 plt.xlabel('python')
 plt.ylabel("optimized")
