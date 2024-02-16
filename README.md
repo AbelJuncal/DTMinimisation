@@ -72,4 +72,4 @@ O mesmo pero para un intento de optimización do código que non funcionou como 
 
 ## Licenza
 
-Este proxecto atópase baixo a licenza de código aberto Mozilla. Véxase [LICENSE]().
+Este proxecto atópase baixo a licenza de código aberto Mozilla. Véxase [LICENSE](https://github.com/AbelJuncal/DTMinimisation/blob/main/LICENSE).
