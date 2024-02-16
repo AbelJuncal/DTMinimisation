@@ -28,7 +28,7 @@ class DtMinimisation():
         self.output = list(output)
 
     def printInput(self):
-        print("Input implicants for the Decision Tree minimizer:\n")
+        print("Input implicants for the minimizer:\n")
         for implicant in self.input:
             print(implicant)
         print("\n")
@@ -44,6 +44,9 @@ class DtMinimisation():
         for implicant in self.output:
             print(implicant)
         print("\n")
+
+    def getOutput(self):
+        return self.output
 
     def saveOutputInFile(self, path):
         print("Saving output in " + path)
