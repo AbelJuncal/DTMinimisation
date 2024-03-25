@@ -1,3 +1,7 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 from mindt_Selino.Implicant.booleanImplicant import *
 from mindt_Selino.Implicant.intervalmplicant import *
 from mindt_Selino.Implicant.optimizedintervalImplicant import *
@@ -27,8 +31,9 @@ class ReadInput():
         setsList = []
 
         for i in range(numVariables):
+            values = lines[0].split()
             nuevoSetVariable = set()
-            nuevoSetVariable.update([0, int(lines[0])])
+            nuevoSetVariable.update([int(values[0]), int(values[1])])
             lines.pop(0)
             setsList.append(nuevoSetVariable)
 
@@ -42,8 +47,8 @@ class ReadInput():
                 nuevatupler = []
 
                 for elementer in lista:
-                    setsList[i].add(int(elementer))
-                    nuevatupler.append(int(elementer))
+                    setsList[i].add(float(elementer))
+                    nuevatupler.append(float(elementer))
 
                 nuevatupler = tuple(nuevatupler)
                 tuples.append(nuevatupler)
